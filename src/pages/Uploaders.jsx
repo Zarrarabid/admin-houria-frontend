@@ -19,7 +19,7 @@ export const Uploaders = () => {
     const [excelData, setExcelData] = useState([]);
     const [fileName, setFileName] = useState('');
     const [loading, setLoading] = useState(false);
-    const [dateIs, setDateIs] = useState(moment()?.format("YYYY-MM"));
+    const [dateIs, setDateIs] = useState();
 
     const handleFileUpload = (event) => {
         console.log("date----", dateIs);
@@ -141,7 +141,7 @@ export const Uploaders = () => {
             });
 
             if (res.status === 200) {
-                toast.success(`${res.data.inserted} record(s) uploaded successfully!`);
+                toast.success(`${res.data.upserted} record(s) uploaded successfully!`);
                 setExcelData([]);
                 setFileName("");
                 // setRefreshData(!refreshData);
@@ -255,7 +255,7 @@ export const Uploaders = () => {
                 </p>
 
                 <a
-                    href={`${import.meta.env.VITE_APP_BACKEND_BASE_URL}public/uploadersSample/Items-Uploader-Samples1.xlsx`}
+                    href={`${import.meta.env.VITE_APP_BACKEND_BASE_URL}public/uploadersSample/Items-Uploader-Sample.xlsx`}
                     download
                     className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
@@ -318,7 +318,7 @@ export const Uploaders = () => {
                         </table>
                     </div>
                     <Button onClick={handleSubmit}>
-                        Search
+                        Upload
                     </Button>
                 </div>
             )}
