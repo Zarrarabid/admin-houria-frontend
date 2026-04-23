@@ -40,7 +40,7 @@ export const Employee = () => {
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage] = useState(10);
+    const [usersPerPage,setUsersPerPage] = useState(10);
     const [totalUsers, setTotalUsers] = useState(0);
     const [allCategories, setAllCategories] = useState(
         ['Engine Parts', 'Interior', 'Exterior', 'Electronics', 'Tires & Wheels', 'Tools', 'Fluids & Chemicals', 'Other']
@@ -319,10 +319,11 @@ export const Employee = () => {
                     </Button> */}
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Select onValueChange={(value) => {
-                            setLimitPage(value)
+                            // setLimitPage(value)
+                            setUsersPerPage(Number(value))
                             handleSearch(value)
                         }}
-                            value={limitPage}
+                            value={limitPage?.toString()}
                             required>
                             <SelectTrigger className="col-span-3">
                                 <SelectValue placeholder="Record" />
@@ -404,7 +405,7 @@ export const Employee = () => {
                                     </td>
                                 </tr>
                             ) : (
-                                users?.map((user, index) => (
+                                users?.sort((a,b) => new Date(b?.uploading_date) - new Date(a?.uploading_date))?.map((user, index) => (
                                     <tr key={user._id}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">{user?.falcon_id}</td> {/* Corrected Sr. No. */}
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.name}</td>

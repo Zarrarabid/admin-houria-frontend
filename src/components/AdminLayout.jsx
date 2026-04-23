@@ -123,14 +123,14 @@ const AdminLayout = () => {
           <h1 className="text-sm font-semibold text-gray-900 dark:text-white flex-1 capitalize">
             {activeKey}
           </h1>
-          <div className="flex items-center gap-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-1.5 text-xs text-gray-400 w-48">
+          {/* <div className="flex items-center gap-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-1.5 text-xs text-gray-400 w-48">
             <Search size={12} />
             <span>Search...</span>
           </div>
           <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 transition-colors relative">
             <Bell size={15} />
             <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-red-500 rounded-full" />
-          </button>
+          </button> */}
           <ModeToggle />
         </header>
 

@@ -443,8 +443,8 @@ export const ProductInventory = () => {
                 </DialogContent>
             </Dialog>
 
-            <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Inventory Management</h1>
-            <p className="text-lg mb-6 text-gray-700 dark:text-gray-300">Manage your application's inventory here.</p>
+            <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Falcon Id Management</h1>
+            <p className="text-lg mb-6 text-gray-700 dark:text-gray-300">Manage your Falcon IDs here.</p>
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
                 <div className="flex w-full md:w-1/3 space-x-2">
                     <Input

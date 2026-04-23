@@ -89,7 +89,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
                             {loading ? <Spinner /> : 'Login'}
                         </button>
                     </div>
-                    <p className="text-center text-gray-700 dark:text-gray-300 text-sm">
+                    {/* <p className="text-center text-gray-700 dark:text-gray-300 text-sm">
                         Don't have an account?{' '}
                         <Link
                             to="/register"
@@ -98,7 +98,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
                         >
                             Register
                         </Link>
-                    </p>
+                    </p> */}
                 </form>
             </div>
         </div>
