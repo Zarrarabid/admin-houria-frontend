@@ -26,7 +26,7 @@ const AdminLayout = () => {
     if (p.includes('users'))         return 'users';
     if (p.includes('roles'))         return 'roles';
     if (p.includes('merchandise'))         return 'merchandise';
-    if (p.includes('falcon_ids'))         return 'falcon_ids';
+    if (p.includes('falcon_ids'))         return 'falcon ids'; // change the key issue
     if (p.includes('employees'))         return 'employees';
     if (p.includes('bulk-uploaders')) return 'uploaders';
     return 'dashboard';
