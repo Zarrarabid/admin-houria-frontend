@@ -10,6 +10,7 @@ import Roles from './pages/Roles';
 import ProductInventory from './pages/ProductInventory';
 import Uploaders from './pages/Uploaders';
 import Employee from './pages/Employee';
+import Merchandise from './pages/Merchandise';
 
 // Create authentication check component
 const RequireAuth = ({ children, isAuthenticated, isLoading }) => {
@@ -88,6 +89,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/users" element={<Users />} />
             <Route path="/roles" element={<Roles />} />
+            <Route path="/merchandise" element={<Merchandise />} />
             <Route path="/falcon_ids" element={<ProductInventory />} />
             <Route path="/employees" element={<Employee />} />
             <Route path="/bulk-uploaders" element={<Uploaders />} />
