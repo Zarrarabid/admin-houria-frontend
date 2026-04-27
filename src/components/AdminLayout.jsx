@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { key: 'dashboard',      label: 'Dashboard', icon: LayoutDashboard, path: 'dashboard' },
   // { key: 'users',          label: 'Users',     icon: Users,           path: 'users'     },
   // { key: 'roles',          label: 'Roles',     icon: ShieldCheck,     path: 'roles'     },
+  { key: 'merchandise',          label: 'Merchendise',     icon: Package,         path: 'merchandise'     },
   { key: 'falcon ids',          label: 'Falcon Ids',     icon: Package,         path: 'falcon_ids'     },
   { key: 'uploaders',      label: 'Uploaders', icon: Upload,          path: 'bulk-uploaders' },
   { key: 'employees',      label: 'Employees', icon: Users,          path: 'employees' },
@@ -24,6 +25,7 @@ const AdminLayout = () => {
     const p = location.pathname;
     if (p.includes('users'))         return 'users';
     if (p.includes('roles'))         return 'roles';
+    if (p.includes('merchandise'))         return 'merchandise';
     if (p.includes('falcon_ids'))         return 'falcon_ids';
     if (p.includes('employees'))         return 'employees';
     if (p.includes('bulk-uploaders')) return 'uploaders';
