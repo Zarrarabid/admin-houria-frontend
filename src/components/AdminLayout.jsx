@@ -9,7 +9,7 @@ const NAV_ITEMS = [
   // { key: 'users',          label: 'Users',     icon: Users,           path: 'users'     },
   // { key: 'roles',          label: 'Roles',     icon: ShieldCheck,     path: 'roles'     },
   { key: 'merchandise',          label: 'Merchendise',     icon: Package,         path: 'merchandise'     },
-  { key: 'falcon ids',          label: 'Falcon Ids',     icon: Package,         path: 'falcon_ids'     },
+  { key: 'falcon ids',          label: 'Falcon Ids',     icon: ShieldCheck,         path: 'falcon_ids'     },
   { key: 'uploaders',      label: 'Uploaders', icon: Upload,          path: 'bulk-uploaders' },
   { key: 'employees',      label: 'Employees', icon: Users,          path: 'employees' },
 ];
