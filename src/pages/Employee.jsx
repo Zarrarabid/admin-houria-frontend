@@ -67,6 +67,7 @@ export const Employee = () => {
         petrol: 0,
         bonus_amount: 0,
         extra_kms_amount: 0,
+        keeta: 0,
         violation: 0,
         total_deduction: 0,
         bike: 0,
@@ -249,6 +250,7 @@ export const Employee = () => {
             "petrol",
             "bonus_amount",
             "extra_kms_amount",
+            "keeta",
             "violation",
             "total_deduction",
             "bike",
@@ -369,6 +371,9 @@ export const Employee = () => {
                                     Petrol
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    Keeta
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                     Bonus Amount
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -411,17 +416,18 @@ export const Employee = () => {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.name}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{moment(user?.uploading_date).format("MMM-YY")}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.category}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.online_orders || 0}</td> {/* Access role name */}
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.rate || 0}</td> {/* Access role name */}
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.petrol || 0}</td> {/* Access role name */}
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.bonus_amount || 0}</td> {/* Access role name */}
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.extra_kms_amount || 0}</td> {/* Access role name */}
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.violation || 0}</td> {/* Access role name */}
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.total_deduction || 0}</td> {/* Access role name */}
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.bike || 0}</td> {/* Access role name */}
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.office || 0}</td> {/* Access role name */}
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.sim || 0}</td> {/* Access role name */}
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.total || 0}</td> {/* Access role name */}
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.online_orders || 0}</td> 
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.rate || 0}</td> 
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.petrol || 0}</td> 
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.keeta || 0}</td> 
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.bonus_amount || 0}</td> 
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.extra_kms_amount || 0}</td> 
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.violation || 0}</td> 
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.total_deduction || 0}</td> 
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.bike || 0}</td> 
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.office || 0}</td> 
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user?.sim || 0}</td> 
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{Number(user?.total).toFixed(2) || 0}</td> 
                                         {/* <td className="px-6 py-4 whitespace-nowrap text-sm">
                                                             <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${user.isActive ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'}`}>
                                                                 {user.isActive ? 'Active' : 'Inactive'}
