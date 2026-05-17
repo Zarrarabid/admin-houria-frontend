@@ -7,6 +7,7 @@ export const inventorySampleHeading = [
     "Petrol",
     "Bonus AMT",
     "Extra KMS Amount",
+    "Keeta",
     "Quality Vaiolations",
     "Total Deductions",
     "Bike",
