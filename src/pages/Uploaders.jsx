@@ -4,13 +4,21 @@ import * as XLSX from 'xlsx';
 
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
-import { UploadCloud, Download } from 'lucide-react';
+import { UploadCloud, Download, AlertCircle } from 'lucide-react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from '../components/Spinner';
 import { inventorySampleHeading } from '../Data/Data';
 import moment from 'moment';
 import { Button } from '../components/ui/button';
+import { ScrollArea } from "../components/ui/scroll-area";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+} from "../components/ui/dialog";
+
 
 const API_BASE_URL = `${import.meta.env.VITE_APP_BACKEND_URL}/employee`;
 
@@ -20,6 +28,31 @@ export const Uploaders = () => {
     const [fileName, setFileName] = useState('');
     const [loading, setLoading] = useState(false);
     const [dateIs, setDateIs] = useState();
+    const [uploadingMonths, setUploadingMonths] = useState();
+    const [modalflag, setModalflag] = useState(false);
+
+    const getallActiveMonths = async () => {
+        try {
+            setLoading(true);
+
+            const res = await axios.get(`${API_BASE_URL}/info_upload`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            if (res.status === 200) {
+                setUploadingMonths(res.data?.data)
+            }
+        } catch (err) {
+            const msg = err?.response?.data?.message || "Data not found.";
+            toast.error(msg);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        getallActiveMonths()
+    }, [])
 
     const handleFileUpload = (event) => {
         console.log("date----", dateIs);
@@ -147,7 +180,7 @@ export const Uploaders = () => {
                 // setRefreshData(!refreshData);
             }
         } catch (err) {
-            console.log("errrrr",err)
+            console.log("errrrr", err)
             const msg = err?.response?.data?.message || "Bulk upload failed.";
             toast.error(msg);
         } finally {
@@ -155,87 +188,54 @@ export const Uploaders = () => {
         }
     };
 
-    // const handleFileUpload = (event) => {
-    //     const file = event?.target?.files[0];
-    //     let type = file?.name?.substring(file?.name?.lastIndexOf(".") + 1);
-    //     if (file) {
-    //         setFileName(file.name);
-    //         setLoading(true);
-    //         const reader = new FileReader();
-
-    //         if (type === "xlsx" || type === "csv") {
-
-    //             reader.onload = (e) => {
-    //                 try {
-    //                     const data = new Uint8Array(e.target.result);
-    //                     const workbook = XLSX.read(data, { type: 'array' });
-    //                     const sheetName = workbook.SheetNames[0];
-    //                     const worksheet = workbook.Sheets[sheetName];
-    //                     const json = XLSX.utils.sheet_to_json(worksheet);
-
-    //                     const resetAndInvalidate = (message) => {
-    //                         toast.error(message);
-    //                         setExcelData([]);
-    //                     };
-
-    //                     if (json?.length === 0) {
-    //                         resetAndInvalidate("File Should not be empty");
-    //                         return;
-    //                     }
-    //                         console.log(json,"uploadeee",json[0])
-
-
-    //                     const uploadedHeaders = Object.keys(json[0])
-    //                         ?.filter((ele) => !ele?.includes("__EMPTY"))
-    //                         .map((item) => item.trim()?.toLowerCase());
-
-
-    //                     const headersMatch =
-    //                         uploadedHeaders?.length > inventorySampleHeading?.length
-    //                             ? uploadedHeaders?.every((header) => {
-    //                                 return inventorySampleHeading.includes(header.trim()?.toLowerCase());
-    //                             })
-    //                             : inventorySampleHeading?.every((header) => {
-    //                                 return uploadedHeaders.includes(header.trim()?.toLowerCase());
-    //                             });
-    //                     if (!headersMatch) {
-    //                         resetAndInvalidate(
-    //                             "Uploaded file headers do not match the expected format."
-    //                         );
-    //                         return;
-    //                     }
-
-    //                     const filteredData = json?.map((obj) => {
-    //                         return Object?.fromEntries(
-    //                             Object?.entries(obj)?.filter(
-    //                                 ([key]) => !key?.startsWith("__EMPTY")
-    //                             )
-    //                         );
-    //                     });
-
-    //                     setExcelData(filteredData);
-    //                     toast.success("Excel file uploaded and parsed successfully!");
-    //                 } catch (error) {
-    //                     console.error("Error reading Excel file:", error);
-    //                     toast.error("Error reading Excel file. Please ensure it's a valid Excel format.");
-    //                 } finally {
-    //                     setLoading(false);
-    //                 }
-    //             };
-
-    //             reader.readAsArrayBuffer(file);
-    //         }
-    //     } else {
-    //         toast.error("Please Upload Correct Format of File");
-    //         setExcelData([])
-    //         setLoading(false)
-    //     }
-    //     event.target.value = ""
-    // };
-
     return (
         <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 transition-colors duration-300">
             <ToastContainer />
+            {/* ------- Modal for Month list which data in being uploaded  ----------- */}
+            <Dialog open={modalflag} onOpenChange={setModalflag}>
+                <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden rounded-2xl">
+
+                    {/* Header */}
+                    <DialogHeader className="px-6 py-4 border-b bg-muted/40">
+                        <DialogTitle className="text-lg font-semibold">
+                            Uploading Month
+                        </DialogTitle>
+                    </DialogHeader>
+
+                    {/* Content */}
+                    <div className="p-6">
+                        <ScrollArea className="h-[320px] max-h-[60vh] pr-2">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                {uploadingMonths?.map((item) => (
+                                    <Button
+                                        key={item}
+                                        variant="outline"
+                                        className="
+                w-full justify-center rounded-xl
+                transition-all duration-200
+                border-muted-foreground/20
+              "
+                                        onClick={() => console.log(item)}
+                                    >
+                                        {moment(item).format("YYYY - MMM")}
+                                    </Button>
+                                ))}
+                            </div>
+                        </ScrollArea>
+                    </div>
+
+                    <div className="px-6 py-4 border-t flex justify-end bg-muted/30">
+                        <Button variant="secondary" onClick={() => setModalflag(false)}>
+                            Close
+                        </Button>
+                    </div>
+
+                </DialogContent>
+            </Dialog>
+
+
+
+
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Excel Uploader</h2>
 
             <div className="mb-8 p-6 border border-dashed border-gray-300 dark:border-gray-600 rounded-lg flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-700">
@@ -264,7 +264,7 @@ export const Uploaders = () => {
                 </a>
 
             </div>
-            <div className="flex w-full md:w-1/3 space-x-2"> {/* Added flex container and spacing */}
+            <div className="flex w-full md:w-1/3 space-x-2 items-end">
                 <div className="space-y-1">
                     <label className="text-sm text-gray-600">YYYY-MM</label>
                     <Input
@@ -274,6 +274,12 @@ export const Uploaders = () => {
                         onChange={(e) => setDateIs(e.target.value)}
                     />
                 </div>
+                <AlertCircle
+                    onClick={() => {
+                        setModalflag(true)
+                    }}
+                    className="duration-500 hover:rotate-[360deg] mb-2 hover:scale-110 cursor-pointer" />
+
             </div>
 
             {loading && <Spinner />}
